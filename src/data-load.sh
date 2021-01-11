@@ -1,0 +1,4 @@
+#!/bin/bash
+(echo -n '{"filename":"invoice-1.pdf", "data": "'; base64 ../data/invoice-1.pdf; echo '"}') | curl -H "Content-Type: application/json" -d @-  http://localhost:9200/documents/_doc/1?pipeline=documents
+(echo -n '{"filename":"invoice-2.pdf", "data": "'; base64 ../data/invoice-2.pdf; echo '"}') | curl -H "Content-Type: application/json" -d @-  http://localhost:9200/documents/_doc/2?pipeline=documents
+(echo -n '{"filename":"invoice-3.pdf", "data": "'; base64 ../data/invoice-3.pdf; echo '"}') | curl -H "Content-Type: application/json" -d @-  http://localhost:9200/documents/_doc/3?pipeline=documents
