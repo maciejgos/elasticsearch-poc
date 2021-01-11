@@ -28,9 +28,14 @@ namespace DocumentsService.Api.Controllers
         }
 
         [HttpPut]
-        public void Put()
+        [Route("index")]
+        public async Task<ActionResult> Put(string path)
         {
-
+            var response = await _service.IndexDocument(path);
+            if(response)
+                return new OkResult();
+            else
+                return new BadRequestResult();
         }
 
         [HttpPost]
