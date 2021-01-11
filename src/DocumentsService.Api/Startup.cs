@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DocumentsService.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace DocumentsService.Api
@@ -32,6 +26,8 @@ namespace DocumentsService.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DocumentsService.Api", Version = "v1" });
             });
+            services.Configure<ElasticsearchConfiguration>(Configuration.GetSection("ElasticsearchConfiguration"));
+            services.AddSingleton(typeof(DocumentsService.Api.Services.DocumentsService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
